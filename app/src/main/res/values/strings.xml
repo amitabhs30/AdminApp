@@ -4,4 +4,8 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="login">Login</string>
+    <string name="prod_name">Product Name</string>
+    <string name="prod_description">Product Description</string>
+    <string name="prod_price">Product Price</string>
+    <string name="prod_add">Add Product</string>
 </resources>
