@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 if(dataSnapshot.child(username.getText().toString().trim()).exists())
                 {
                     AdminValues admindata=dataSnapshot.child(username.getText().toString().trim()).getValue(AdminValues.class);
-//                    Toast.makeText(MainActivity.this, admindata.getPassword().toString(), Toast.LENGTH_SHORT).show();
                         String a=password.getText().toString();
                     if(admindata.getPassword().equals(password.getText().toString()))
                     {
@@ -83,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     loadingBar.dismiss();
                 }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
