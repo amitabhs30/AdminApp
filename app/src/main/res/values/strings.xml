@@ -8,4 +8,6 @@
     <string name="prod_description">Product Description</string>
     <string name="prod_price">Product Price</string>
     <string name="prod_add">Add Product</string>
+    <string name="prod_type_1">AR Selfie Stick</string>
+    <string name="prod_type_2">AR Card</string>
 </resources>
