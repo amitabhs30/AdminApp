@@ -18,7 +18,7 @@ public class AdminCategory extends AppCompatActivity {
 
         linearLayout1 = findViewById(R.id.add_product_selfie);
 
-        linearLayout2 = findViewById(R.id.add_product_card);
+
 
         linearLayout1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,14 +29,14 @@ public class AdminCategory extends AppCompatActivity {
             }
         });
 
-        linearLayout2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AdminCategory.this, AddProducts.class);
-                intent.putExtra("Category", "AR Card ");
-                startActivity(intent);
-            }
-        });
+//        linearLayout2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(AdminCategory.this, AddProducts.class);
+//                intent.putExtra("Category", "AR Card ");
+//                startActivity(intent);
+//            }
+//        });
     }
 
 }
