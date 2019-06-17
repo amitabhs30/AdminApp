@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         String a=password.getText().toString();
                     if(admindata.getPassword().equals(password.getText().toString()))
                     {
-                        startActivity(new Intent(MainActivity.this,AddProducts.class));
+                        startActivity(new Intent(MainActivity.this,AdminCategory.class));
                         Toast.makeText(MainActivity.this, "Admin Logged In", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }

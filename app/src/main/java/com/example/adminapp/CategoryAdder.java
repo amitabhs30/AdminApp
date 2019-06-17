@@ -1,14 +1,12 @@
 package com.example.adminapp;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -32,15 +30,17 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class AddProducts extends AppCompatActivity {
+public class CategoryAdder extends AppCompatActivity {
 
-   // private String CategoryName;
-    private Button AddNewProductButton;
-    private ImageView InputProductImage;
-    private EditText InputProductName, InputProductDescription, InputproductPrice,InputProductCategory;
-    private StorageReference productImageRef;
-    private FirebaseDatabase productInfodata=FirebaseDatabase.getInstance();
-    private DatabaseReference productInfoRef=productInfodata.getReference().child("Category");
+
+
+    // private String CategoryName;
+//    private Button AddNewProductButton;
+    private ImageView InputCategoryImage;
+    private EditText InputCategoryName, InputCategoryDescription, InputCategoryPrice,InputCompany;
+    private StorageReference categoryImageRef;
+    private FirebaseDatabase categoryInfodata=FirebaseDatabase.getInstance();
+    private DatabaseReference categoryInfoRef=categoryInfodata.getReference().child("Category");
     private int value=1;
     private Uri imageuri;
     private String saveCurrentDate;
@@ -50,30 +50,30 @@ public class AddProducts extends AppCompatActivity {
     private String name;
     private String description ;
     private String price ;
-    private String category;
+    private String company;
     private String imageUri;
     private ProgressDialog loadingBar;
     private int flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_products);
+        setContentView(R.layout.activity_category_adder);
 
         //CategoryName = getIntent().getExtras().get("Category").toString();
 
-        AddNewProductButton = findViewById(R.id.add_product_button);
-        InputProductImage = findViewById(R.id.add_product_image);
-        InputProductName = findViewById(R.id.add_product_name);
-        InputProductDescription = findViewById(R.id.add_product_description);
-        InputproductPrice = findViewById(R.id.add_product_price);
-        InputProductCategory=findViewById(R.id.category_name);
-        productImageRef= FirebaseStorage.getInstance().getReference().child("Template Image");
-        loadingBar=new ProgressDialog(AddProducts.this);
-        InputProductImage.setOnClickListener(new View.OnClickListener() {
+        ///AddNewProductButton = findViewById(R.id.add_product_button);
+        InputCategoryImage = findViewById(R.id.add_category_image);
+        InputCategoryName = findViewById(R.id.add_category_name);
+        InputCategoryDescription = findViewById(R.id.add_category_description);
+        InputCategoryPrice = findViewById(R.id.add_category_price);
+        InputCompany=findViewById(R.id.add_company_details);
+        categoryImageRef= FirebaseStorage.getInstance().getReference().child("Category Image");
+        loadingBar=new ProgressDialog(CategoryAdder.this);
+        InputCategoryImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GalleryIntent();
-        flag=0;
+                flag=0;
 
 
             }
@@ -98,64 +98,64 @@ public class AddProducts extends AppCompatActivity {
         if(requestCode==value&&resultCode==RESULT_OK&&data!=null)
         {
             imageuri=data.getData();
-            InputProductImage.setImageURI(imageuri);
+            InputCategoryImage.setImageURI(imageuri);
 
 
 
         }
 
     }
-    public void SaveProduct (View view)
+    public void SaveCategory (View view)
     {
         checkIfAnyDetailIsEmpty();
     }
 
     private void checkIfAnyDetailIsEmpty() {
-        name =InputProductName.getText().toString();
-        description =InputProductDescription.getText().toString();
-        price =InputproductPrice.getText().toString();
-        category= InputProductCategory.getText().toString();
+        name =InputCategoryName.getText().toString();
+        description =InputCategoryDescription.getText().toString();
+        price =InputCategoryPrice.getText().toString();
+        company= InputCompany.getText().toString();
         imageUri=imageuri.toString();
 
         if(TextUtils.isEmpty(name))
         {
-            Toast.makeText(this, "Enter Product Name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter Category Name", Toast.LENGTH_SHORT).show();
         }
 
         else if(TextUtils.isEmpty(description))
         {
-            Toast.makeText(this, "Enter Product Description", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter Category Description", Toast.LENGTH_SHORT).show();
         }
 
         else if(TextUtils.isEmpty(price))
         {
-            Toast.makeText(this, "Enter Product Price", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter category Price", Toast.LENGTH_SHORT).show();
         }
 
-        else if(TextUtils.isEmpty(category))
+        else if(TextUtils.isEmpty(company))
         {
-            Toast.makeText(this, "Enter Product Company", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter Company", Toast.LENGTH_SHORT).show();
         }
 
         else if(imageuri==null)
         {
-            Toast.makeText(this, "Please Add Image Product", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please Add Category Image", Toast.LENGTH_SHORT).show();
         }
         else
         {
-        ExistingProductChecker();
-        loadingBar.setTitle("Adding Products");
-        loadingBar.setMessage("Please Wait");
-        loadingBar.show();
+            ExistingCategoryChecker();
+            loadingBar.setTitle("Adding Category");
+            loadingBar.setMessage("Please Wait");
+            loadingBar.show();
         }
     }
-    private void ExistingProductChecker() {
+    private void ExistingCategoryChecker() {
         if (flag != 1) {
-            productInfoRef.addValueEventListener(new ValueEventListener() {
+            categoryInfoRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.child(category).child("Products").child(name).exists()) {
-                        Toast.makeText(AddProducts.this, "Product Already Exists", Toast.LENGTH_SHORT).show();
+                    if (dataSnapshot.child(InputCategoryName.getText().toString()).exists()) {
+                        Toast.makeText(CategoryAdder.this, "category Already Exists", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     } else {
                         createImageKey();
@@ -182,7 +182,7 @@ public class AddProducts extends AppCompatActivity {
 
         key=saveCurrentDate + saveCurrentTime;
 
-        final StorageReference filePath= productImageRef.child(imageuri.getLastPathSegment()+key+".jpg");
+        final StorageReference filePath= categoryImageRef.child(imageuri.getLastPathSegment()+key+".jpg");
         final UploadTask uploadTask= filePath.putFile(imageuri);
         filePath.putFile(imageuri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -192,7 +192,7 @@ public class AddProducts extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         downloadImageUri=uri.toString().trim();
                         //Toast.makeText(AddProducts.this,downloadImageUri, Toast.LENGTH_SHORT).show();
-                        AddProductToDatabase();
+                        AddCategoryToDatabase();
                     }
                 });
 
@@ -200,34 +200,34 @@ public class AddProducts extends AppCompatActivity {
         });
     }
 
-    private void AddProductToDatabase() {
+    private void AddCategoryToDatabase() {
 
 
-                    final HashMap<String,Object> productInfo=new HashMap<>();
-                    productInfo.put("Name",name);
-                    productInfo.put("Description",description);
-                    productInfo.put("Price",price);
-                    productInfo.put("Category",category);
-                    productInfo.put("image_uri",downloadImageUri);
+        final HashMap<String,Object> categoryInfo=new HashMap<>();
+        categoryInfo.put("Name",name);
+        categoryInfo.put("Description",description);
+        categoryInfo.put("Price",price);
+        categoryInfo.put("Company_Name",company);
+        categoryInfo.put("image_uri",downloadImageUri);
 
-                    productInfoRef.child(category).child("Products").child(name).updateChildren(productInfo)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                    {
-                                        Toast.makeText(AddProducts.this, "Product Added", Toast.LENGTH_SHORT).show();
-                                        productInfo.clear();
-                                        loadingBar.dismiss();
-                                        flag=1;
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(AddProducts.this, "Network Error", Toast.LENGTH_SHORT).show();
-                                        loadingBar.dismiss();
-                                    }
-                                }
-                            });
+        categoryInfoRef.child(name).updateChildren(categoryInfo)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(CategoryAdder.this, "Category Added", Toast.LENGTH_SHORT).show();
+                            categoryInfo.clear();
+                            loadingBar.dismiss();
+                            flag=1;
+                        }
+                        else
+                        {
+                            Toast.makeText(CategoryAdder.this, "Network Error", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        }
+                    }
+                });
 
 
 //                else
@@ -236,7 +236,4 @@ public class AddProducts extends AppCompatActivity {
 //                    loadingBar.dismiss();
 //                }
     }
-
-
 }
-

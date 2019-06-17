@@ -80,8 +80,22 @@
         android:textColor="#FFF"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:onClick="SaveProduct"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="600dp"/>
+    <EditText
+        android:id="@+id/category_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/add_product_price"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/box_bg"
+        android:hint="@string/category_name"
+        android:inputType="text"
+        android:textSize="20sp" />
 
 </RelativeLayout>
 </ScrollView>
