@@ -40,7 +40,7 @@ public class CategoryAdder extends AppCompatActivity {
     private EditText InputCategoryName, InputCategoryDescription, InputCategoryPrice,InputCompany;
     private StorageReference categoryImageRef;
     private FirebaseDatabase categoryInfodata=FirebaseDatabase.getInstance();
-    private DatabaseReference categoryInfoRef=categoryInfodata.getReference().child("Category");
+    private DatabaseReference categoryInfoRef=categoryInfodata.getReference().child("Categories");
     private int value=1;
     private Uri imageuri;
     private String saveCurrentDate;
@@ -210,7 +210,7 @@ public class CategoryAdder extends AppCompatActivity {
         categoryInfo.put("Company_Name",company);
         categoryInfo.put("image_uri",downloadImageUri);
 
-        categoryInfoRef.child(name).updateChildren(categoryInfo)
+        categoryInfoRef.child(name.toString()).updateChildren(categoryInfo)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

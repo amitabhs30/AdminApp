@@ -40,7 +40,7 @@ public class AddProducts extends AppCompatActivity {
     private EditText InputProductName, InputProductDescription, InputproductPrice,InputProductCategory;
     private StorageReference productImageRef;
     private FirebaseDatabase productInfodata=FirebaseDatabase.getInstance();
-    private DatabaseReference productInfoRef=productInfodata.getReference().child("Category");
+    private DatabaseReference productInfoRef=productInfodata.getReference().child("Categories");
     private int value=1;
     private Uri imageuri;
     private String saveCurrentDate;
@@ -67,7 +67,7 @@ public class AddProducts extends AppCompatActivity {
         InputProductDescription = findViewById(R.id.add_product_description);
         InputproductPrice = findViewById(R.id.add_product_price);
         InputProductCategory=findViewById(R.id.category_name);
-        productImageRef= FirebaseStorage.getInstance().getReference().child("Template Image");
+        productImageRef= FirebaseStorage.getInstance().getReference().child("Product Image");
         loadingBar=new ProgressDialog(AddProducts.this);
         InputProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,10 +154,18 @@ public class AddProducts extends AppCompatActivity {
             productInfoRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.child(category).child("Products").child(name).exists()) {
+
+                    if (!(dataSnapshot.child(category).exists()))
+                    {
+                        Toast.makeText(AddProducts.this, "Category Not Valid", Toast.LENGTH_SHORT).show();
+                        loadingBar.dismiss();
+                    }
+
+                    else if (dataSnapshot.child(category).child("Products").child(name).exists()) {
                         Toast.makeText(AddProducts.this, "Product Already Exists", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
-                    } else {
+                    }
+                    else {
                         createImageKey();
                     }
                 }
@@ -210,7 +218,7 @@ public class AddProducts extends AppCompatActivity {
                     productInfo.put("Category",category);
                     productInfo.put("image_uri",downloadImageUri);
 
-                    productInfoRef.child(category).child("Products").child(name).updateChildren(productInfo)
+                    productInfoRef.child(category).child("Products").child("Name").child(name).updateChildren(productInfo)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
