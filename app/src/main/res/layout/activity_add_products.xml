@@ -76,7 +76,7 @@
         android:id="@+id/add_product_button"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_box_purple"
         android:text="@string/prod_add"
         android:textAlignment="center"
         android:textAllCaps="true"

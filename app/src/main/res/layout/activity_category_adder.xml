@@ -73,7 +73,7 @@
             android:id="@+id/add_category_button"
             android:layout_width="300dp"
             android:layout_height="80dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/button_box_purple"
             android:text="@string/add_category"
             android:textAlignment="center"
             android:textAllCaps="true"

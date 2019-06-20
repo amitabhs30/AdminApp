@@ -19,7 +19,21 @@
         android:textColor="#FFF"
         android:text="@string/add_category"
         android:onClick="addCategory"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_box_purple"
+        android:layout_marginTop="40dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:onClick="addProduct"
+        android:text="@string/delete_category"
+        android:background="@drawable/button_box_purple"
         android:layout_marginTop="40dp"
         />
 
@@ -33,8 +47,27 @@
         android:textColor="#FFF"
         android:onClick="addProduct"
         android:text="@string/add_product"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_box_purple"
         android:layout_marginTop="40dp"
         />
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textColor="#FFF"
+        android:onClick="addProduct"
+        android:text="@string/prod_delete"
+        android:background="@drawable/button_box_purple"
+        android:layout_marginTop="40dp"
+        />
+
+
+
 
 </LinearLayout>
