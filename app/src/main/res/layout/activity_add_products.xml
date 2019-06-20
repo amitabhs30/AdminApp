@@ -38,7 +38,8 @@
         android:background="@drawable/box_bg"
         android:hint="@string/prod_name"
         android:inputType="text"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:padding="10dp"/>
 
 
     <EditText
@@ -53,7 +54,8 @@
         android:background="@drawable/box_bg"
         android:hint="@string/prod_description"
         android:inputType="textMultiLine"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:padding="10dp"/>
 
     <EditText
         android:id="@+id/add_product_price"
@@ -67,7 +69,8 @@
         android:background="@drawable/box_bg"
         android:hint="@string/prod_price"
         android:inputType="numberDecimal"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:padding="10dp"/>
 
     <Button
         android:id="@+id/add_product_button"
