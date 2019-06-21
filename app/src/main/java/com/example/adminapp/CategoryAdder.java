@@ -115,7 +115,6 @@ public class CategoryAdder extends AppCompatActivity {
         description =InputCategoryDescription.getText().toString();
         price =InputCategoryPrice.getText().toString();
         company= InputCompany.getText().toString();
-        imageUri=imageuri.toString();
 
         if(TextUtils.isEmpty(name))
         {
@@ -142,16 +141,17 @@ public class CategoryAdder extends AppCompatActivity {
             Toast.makeText(this, "Please Add Category Image", Toast.LENGTH_SHORT).show();
         }
         else
-        {
+        {   imageUri=imageuri.toString();
             ExistingCategoryChecker();
             loadingBar.setTitle("Adding Category");
             loadingBar.setMessage("Please Wait");
+            loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
         }
     }
     private void ExistingCategoryChecker() {
         if (flag != 1) {
-            categoryInfoRef.addValueEventListener(new ValueEventListener() {
+            categoryInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.child(InputCategoryName.getText().toString()).exists()) {

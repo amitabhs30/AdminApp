@@ -18,4 +18,5 @@
     <string name="category_name">Category Name</string>
     <string name="category_Discription">Category Discription</string>
     <string name="Category_price">Category Price</string>
+    <string name="delete_product">Delete Product</string>
 </resources>

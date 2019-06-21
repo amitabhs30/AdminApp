@@ -115,7 +115,7 @@ public class AddProducts extends AppCompatActivity {
         description =InputProductDescription.getText().toString();
         price =InputproductPrice.getText().toString();
         category= InputProductCategory.getText().toString();
-        imageUri=imageuri.toString();
+
 
         if(TextUtils.isEmpty(name))
         {
@@ -139,19 +139,20 @@ public class AddProducts extends AppCompatActivity {
 
         else if(imageuri==null)
         {
-            Toast.makeText(this, "Please Add Image Product", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please Add Product Image", Toast.LENGTH_SHORT).show();
         }
         else
-        {
+        { imageUri=imageuri.toString();
         ExistingProductChecker();
         loadingBar.setTitle("Adding Products");
         loadingBar.setMessage("Please Wait");
+        loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
         }
     }
     private void ExistingProductChecker() {
         if (flag != 1) {
-            productInfoRef.addValueEventListener(new ValueEventListener() {
+            productInfoRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

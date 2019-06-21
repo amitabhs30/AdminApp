@@ -57,5 +57,17 @@ public class AdminCategory extends AppCompatActivity {
 
         startActivity(new Intent(AdminCategory.this,AddProducts.class));
     }
+    public void deleteCategory(View view)
+    {
+
+            startActivity(new Intent(AdminCategory.this,DeleteCategory.class));
+
+    }
+    public void deleteProduct(View view)
+    {
+
+        startActivity(new Intent(AdminCategory.this,DeleteProduct.class));
+
+    }
 
 }
